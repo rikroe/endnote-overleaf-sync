@@ -5,11 +5,11 @@ A collection of Python scripts to download a bibliography from EndNote, fix the 
 For now, clone this repository and install the requirements from `requirements.txt`. This script requires Python>=3.7.
 
 ## Usage
-### Endnote export
-Run with `python endnote_bibtex_export.py`. See below for arguments.
+### Endnote
+Run with `python endnote-cli.py`. See below for arguments.
 
 ```
-Usage: endnote_bibtex_export.py [OPTIONS]
+Usage: endnote-cli.py export [OPTIONS]
 
   Export all EndNote refrences in BibTex format.
 
@@ -19,11 +19,9 @@ Options:
   --file FILE      Local Bibtex file
   --help           Show this message and exit.
 ```
-### Endnote BibTex parser & file fix
-Run with `python endnote_bibtex_parser.py`. See below for arguments.
 
 ```
-Usage: endnote_bibtex_parser.py [OPTIONS]
+Usage: endnote-cli.py parse [OPTIONS]
 
   Parse and homogenize a BibTex from Endnote.
 
@@ -35,10 +33,10 @@ Options:
 ```
 
 ### Overleaf upload
-Run with `python overleaf_upload.py`. See below for arguments.
+Run with `python overleaf-cli.py`. See below for arguments.
 
 ```
-Usage: overleaf_file_upload.py [OPTIONS]
+Usage: overleaf-cli.py [OPTIONS]
 
   Upload a file to an Overleaf project.
 
