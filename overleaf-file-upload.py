@@ -51,7 +51,16 @@ class OverleafSession(Session):
     "--file", required=True, help="File to upload", type=click.Path(exists=True, dir_okay=False, resolve_path=True)
 )
 @click.option("--folder", help="Subfolder in project (case sensitive)", type=click.Path())
-def upload(host: str, user: str, password: str, project: str, file: Path, folder: Optional[Path] = None):
+@click.option("--rename-to", help="Rename file on Overleaf", type=click.STRING)
+def upload(
+    host: str,
+    user: str,
+    password: str,
+    project: str,
+    file: Path,
+    folder: Optional[Path] = None,
+    rename_to: Optional[str] = None,
+):
     """Upload a file to an Overleaf project."""
 
     folder = (Path("/") / folder) if folder else Path("/")
@@ -95,18 +104,20 @@ def upload(host: str, user: str, password: str, project: str, file: Path, folder
                 break
 
     # Finally, upload the file
+    target_file_name = Path(file).name if not rename_to else rename_to
     r_upload = s.post(
         f"{host}/project/{project_id}/upload",
         params={"folder_id": folders[folder]},
         data={
             "relativePath": "null",
-            "name": Path(file).name,
+            "name": target_file_name,
             "type": "application/octet-stream",
         },
         files={
-            "qqfile": open(file, "rb"),
+            "qqfile": (target_file_name, open(file, "rb")),
         },
     )
+    # print(r_upload.request.body)
     print(r_upload.text)
 
 
