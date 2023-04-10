@@ -6,10 +6,10 @@ For now, clone this repository and install the requirements from `requirements.t
 
 ## Usage
 ### Endnote export
-Run with `python endnote-bibtex-export.py`. See below for arguments.
+Run with `python endnote_bibtex_export.py`. See below for arguments.
 
 ```
-Usage: endnote-bibtex-export.py [OPTIONS]
+Usage: endnote_bibtex_export.py [OPTIONS]
 
   Export all EndNote refrences in BibTex format.
 
@@ -20,10 +20,10 @@ Options:
   --help           Show this message and exit.
 ```
 ### Endnote BibTex parser & file fix
-Run with `python endnote-bibtex-parser.py`. See below for arguments.
+Run with `python endnote_bibtex_parser.py`. See below for arguments.
 
 ```
-Usage: endnote-bibtex-parser.py [OPTIONS]
+Usage: endnote_bibtex_parser.py [OPTIONS]
 
   Parse and homogenize a BibTex from Endnote.
 
@@ -35,10 +35,10 @@ Options:
 ```
 
 ### Overleaf upload
-Run with `python overleaf-upload.py`. See below for arguments.
+Run with `python overleaf_upload.py`. See below for arguments.
 
 ```
-Usage: overleaf-file-upload.py [OPTIONS]
+Usage: overleaf_file_upload.py [OPTIONS]
 
   Upload a file to an Overleaf project.
 

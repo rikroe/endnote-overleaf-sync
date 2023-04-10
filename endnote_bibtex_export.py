@@ -5,15 +5,6 @@ import click
 import requests
 
 
-@click.command()
-@click.option("--user", required=True, help="Endnote user")
-@click.option("--password", prompt=True, hide_input=True, required=True, help="Password password")
-@click.option(
-    "--file",
-    help="Local Bibtex file",
-    type=click.Path(exists=False, dir_okay=False, resolve_path=True),
-    default="bibtex.bib",
-)
 def export(user: str, password: str, file: Optional[str] = None):
     """Export all EndNote refrences in BibTex format."""
 
@@ -74,5 +65,19 @@ def export(user: str, password: str, file: Optional[str] = None):
     return result
 
 
+@click.command()
+@click.option("--user", required=True, help="Endnote user")
+@click.option("--password", prompt=True, hide_input=True, required=True, help="Password password")
+@click.option(
+    "--file",
+    help="Local Bibtex file",
+    type=click.Path(exists=False, dir_okay=False, resolve_path=True),
+    default="bibtex.bib",
+)
+def export_cli(user: str, password: str, file: Optional[str] = None):
+    """Export all EndNote refrences in BibTex format."""
+    return export(user=user, password=password, file=file)
+
+
 if __name__ == "__main__":
-    export()
+    export_cli()
