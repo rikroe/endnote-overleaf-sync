@@ -1,3 +1,5 @@
 requests
 websocket-client
 click
+bibtexparser
+python-slugify
