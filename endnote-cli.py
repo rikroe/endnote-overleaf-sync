@@ -1,3 +1,4 @@
+import asyncio
 from typing import Optional
 
 import click
@@ -21,8 +22,8 @@ def cli():
     default="bibtex.bib",
 )
 def export(user: str, password: str, file: Optional[str] = None):
-    """Export all EndNote refrences in BibTex format."""
-    return endnote_bibtex_export.export(user=user, password=password, file=file)
+    """Export all EndNote references in BibTex format."""
+    return asyncio.run(endnote_bibtex_export.export(user=user, password=password, file=file))
 
 
 @cli.command()
@@ -40,7 +41,7 @@ def export(user: str, password: str, file: Optional[str] = None):
 @click.option("--remove-notes", help="Clear notes field", type=click.BOOL, default=True)
 def parse(input: Optional[str] = None, output: Optional[str] = None, remove_notes: bool = True):
     """Parse and homogenize a BibTex from Endnote."""
-    return endnote_bibtex_parser.parse(input=input, output=output)
+    return asyncio.run(endnote_bibtex_parser.parse(input=input, output=output))
 
 
 if __name__ == "__main__":
