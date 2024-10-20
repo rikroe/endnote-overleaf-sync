@@ -1,5 +1,5 @@
 httpx
-websockets
+websocket-client
 click
 bibtexparser
 python-slugify
