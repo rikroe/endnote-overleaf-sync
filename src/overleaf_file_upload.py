@@ -113,7 +113,7 @@ async def upload(
                 "qqfile": (target_file_name, open(file, "rb")),
             },
         )
-        print(r_upload.text)
+        return r_upload.text
 
 
 if __name__ == "__main__":

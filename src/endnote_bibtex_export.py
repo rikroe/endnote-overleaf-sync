@@ -1,15 +1,15 @@
 import asyncio
 from pathlib import Path
-from typing import Optional
+from typing import Callable, Optional
 
 import httpx
 
 
-async def export(user: str, password: str, file: Optional[str] = None):
+async def export(user: str, password: str, file: Optional[str] = None, callback: Callable = print) -> str | None:
     """Export all EndNote references in BibTex format."""
 
     # Create a session
-    async with httpx.AsyncClient(follow_redirects=True) as s:
+    async with httpx.AsyncClient(follow_redirects=True, timeout=10) as s:
         s.headers.update(
             {
                 "Upgrade-Insecure-Requests": "1",
@@ -22,7 +22,8 @@ async def export(user: str, password: str, file: Optional[str] = None):
         )
 
         # Login
-        print("Logging in...")
+        if callback is not None:
+            callback("Logging in to EndNote...")
         r_login_authorize = await s.post(
             "https://access.clarivate.com/api/authorize",
             json={
@@ -45,7 +46,8 @@ async def export(user: str, password: str, file: Optional[str] = None):
         r_login_cookie.raise_for_status()
 
         # Export all references to Bibtex
-        print("Exporting to BibTex...")
+        if callback is not None:
+            callback("Exporting to BibTex...")
         s.headers["Referer"] = "https://www.myendnoteweb.com/EndNoteWeb.html?func=export%20citations&"
         r_export = await s.post(
             "https://www.myendnoteweb.com/EndNoteWeb.html",
@@ -65,7 +67,8 @@ async def export(user: str, password: str, file: Optional[str] = None):
             await asyncio.to_thread(Path(file).write_text, result)
             result = None
 
-        print("Done.")
+        if callback is not None:
+            callback("Export finished.")
         return result
 
 

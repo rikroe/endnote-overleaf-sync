@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 from typing import Optional
 
@@ -26,9 +27,12 @@ def upload_cli(
     rename_to: Optional[str] = None,
 ):
     """Upload a file to an Overleaf project."""
-    overleaf_file_upload.upload(
-        host=host, user=user, password=password, project=project, file=file, folder=folder, rename_to=rename_to
+    result = asyncio.run(
+        overleaf_file_upload.upload(
+            host=host, user=user, password=password, project=project, file=file, folder=folder, rename_to=rename_to
+        )
     )
+    print(result)
 
 
 if __name__ == "__main__":
