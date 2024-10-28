@@ -4,3 +4,4 @@ click
 bibtexparser
 python-slugify
 python-dotenv
+streamlit
